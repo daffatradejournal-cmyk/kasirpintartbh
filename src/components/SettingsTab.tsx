@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
 import { StoreProfile } from '../types';
-import { Save, Store, User, GraduationCap, RotateCcw, Download, Check, ShieldCheck } from 'lucide-react';
+import {
+  Save,
+  Store,
+  User,
+  GraduationCap,
+  RotateCcw,
+  Download,
+  Check,
+  ShieldCheck,
+  Sun,
+  Moon,
+  Palette,
+} from 'lucide-react';
 
 interface Props {
   storeProfile: StoreProfile;
   onUpdateStoreProfile: (profile: StoreProfile) => void;
   onResetData: () => void;
+  isDarkMode: boolean;
+  onToggleDarkMode: () => void;
 }
 
 export const SettingsTab: React.FC<Props> = ({
   storeProfile,
   onUpdateStoreProfile,
   onResetData,
+  isDarkMode,
+  onToggleDarkMode,
 }) => {
   const [storeName, setStoreName] = useState(storeProfile.storeName);
   const [address, setAddress] = useState(storeProfile.address);
@@ -61,13 +77,91 @@ export const SettingsTab: React.FC<Props> = ({
           </span>
         </div>
         <p className="text-xs text-zinc-500 dark:text-zinc-400 font-normal mt-0.5">
-          Identitas toko untuk cetak struk thermal, kasir bertugas, dan pencadangan database offline
+          Atur tema tampilan gelap/terang, identitas toko, kasir bertugas, dan pencadangan database
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
         {/* Left Column: Form Toko & Kasir (col-span-7) */}
         <div className="lg:col-span-7 space-y-4">
+          {/* THEME & APPEARANCE SETTING (MOVED HERE AS REQUESTED) */}
+          <div className="bg-white dark:bg-[#121215] p-4 sm:p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs space-y-3">
+            <div className="flex items-center space-x-2.5 pb-2.5 border-b border-zinc-100 dark:border-zinc-800">
+              <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center">
+                <Palette className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">
+                  Tema Tampilan Aplikasi
+                </h3>
+                <p className="text-[11px] text-zinc-400">Pilih mode tampilan layar antarmuka kasir</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3 pt-1">
+              {/* Light Mode Option */}
+              <button
+                type="button"
+                onClick={() => isDarkMode && onToggleDarkMode()}
+                className={`p-3.5 rounded-xl border text-left flex flex-col justify-between space-y-2.5 transition-all ${
+                  !isDarkMode
+                    ? 'border-emerald-500 bg-emerald-50/20 text-zinc-900 shadow-xs ring-1 ring-emerald-500/30'
+                    : 'border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 text-zinc-500 dark:text-zinc-400'
+                }`}
+              >
+                <div className="flex items-center justify-between w-full">
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-200">
+                    <Sun className="w-4 h-4" />
+                  </div>
+                  {!isDarkMode && (
+                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">
+                      ✓ Aktif
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <span className="font-bold text-xs block text-zinc-900 dark:text-zinc-100">
+                    Mode Terang (Light)
+                  </span>
+                  <span className="text-[11px] text-zinc-500 mt-0.5 block">
+                    Latar putih bersih dengan kontras sejuk untuk operasional siang hari
+                  </span>
+                </div>
+              </button>
+
+              {/* Dark Mode Option */}
+              <button
+                type="button"
+                onClick={() => !isDarkMode && onToggleDarkMode()}
+                className={`p-3.5 rounded-xl border text-left flex flex-col justify-between space-y-2.5 transition-all ${
+                  isDarkMode
+                    ? 'border-emerald-500 bg-emerald-950/20 text-zinc-100 shadow-xs ring-1 ring-emerald-500/30'
+                    : 'border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800/40 text-zinc-500 dark:text-zinc-400'
+                }`}
+              >
+                <div className="flex items-center justify-between w-full">
+                  <div className="w-8 h-8 rounded-lg bg-zinc-800 text-emerald-400 flex items-center justify-center border border-zinc-700">
+                    <Moon className="w-4 h-4" />
+                  </div>
+                  {isDarkMode && (
+                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-800">
+                      ✓ Aktif
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <span className="font-bold text-xs block text-zinc-900 dark:text-zinc-100">
+                    Mode Gelap (Dark)
+                  </span>
+                  <span className="text-[11px] text-zinc-400 mt-0.5 block">
+                    True neutral zinc hitam elegan, nyaman di mata tanpa silau
+                  </span>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          {/* Form Toko */}
           <form onSubmit={handleSave} className="space-y-3.5">
             {/* Toko Identity */}
             <div className="bg-white dark:bg-[#121215] p-4 sm:p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs space-y-3">
@@ -173,7 +267,7 @@ export const SettingsTab: React.FC<Props> = ({
             {isSaved && (
               <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900/50 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 animate-in fade-in">
                 <Check className="w-4 h-4 text-emerald-600" />
-                <span>Pengaturan berhasil diperbarui dan tersimpan di penyimpanan lokal!</span>
+                <span>Pengaturan berhasil diperbarui dan tersimpan di browser!</span>
               </div>
             )}
           </form>

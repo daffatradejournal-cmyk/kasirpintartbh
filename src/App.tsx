@@ -12,6 +12,7 @@ import {
   DEFAULT_STORE_PROFILE,
 } from './utils/storage';
 import { generateInvoiceNumber } from './utils/formatters';
+import { Sidebar } from './components/Sidebar';
 import { Navbar } from './components/Navbar';
 import { CashierTab } from './components/CashierTab';
 import { InventoryTab } from './components/InventoryTab';
@@ -294,95 +295,105 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#09090B] flex flex-col font-sans text-zinc-900 dark:text-zinc-100 selection:bg-emerald-100 selection:text-emerald-950 transition-colors duration-150">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#09090B] flex font-sans text-zinc-900 dark:text-zinc-100 selection:bg-emerald-100 selection:text-emerald-950 transition-colors duration-150 overflow-x-hidden">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/95 dark:bg-zinc-800/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2 border border-zinc-700/60 dark:border-zinc-700 animate-in fade-in slide-in-from-top-4">
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/95 dark:bg-zinc-800/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-xl flex items-center space-x-2 border border-zinc-700/60 dark:border-zinc-700 animate-in fade-in slide-in-from-top-2">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Top Navbar with Integrated Desktop Navigation */}
-      <Navbar
-        storeProfile={storeProfile}
-        lowStockCount={lowStockCount}
-        onOpenScanner={() => {
-          setScannerCallback(null);
-          setIsScannerOpen(true);
-        }}
-        onGoToLowStock={() => setActiveTab('inventory')}
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
+      {/* Left Sidebar Navigation (Desktop md:) */}
+      <Sidebar
         activeTab={activeTab}
         onSelectTab={setActiveTab}
+        lowStockCount={lowStockCount}
+        storeProfile={storeProfile}
       />
 
-      {/* Main Tab View */}
-      <main className="flex-1 w-full max-w-[1600px] mx-auto px-3 sm:px-5 lg:px-6 py-3 sm:py-4">
-        {activeTab === 'pos' && (
-          <CashierTab
-            products={products}
-            categories={categories}
-            cartItems={cartItems}
-            cartDiscount={cartDiscount}
-            onAddToCart={handleAddToCart}
-            onUpdateQuantity={handleUpdateQuantity}
-            onUpdateItemDiscount={handleUpdateItemDiscount}
-            onUpdateCartDiscount={(d) => setCartDiscount(d)}
-            onClearCart={handleClearCart}
-            customerName={customerName}
-            setCustomerName={setCustomerName}
-            customerPhone={customerPhone}
-            setCustomerPhone={setCustomerPhone}
-            orderNote={orderNote}
-            setOrderNote={setOrderNote}
-            onConfirmPayment={handleConfirmPayment}
-            onOpenScanner={() => {
-              setScannerCallback(null);
-              setIsScannerOpen(true);
-            }}
-            storeProfile={storeProfile}
-          />
-        )}
+      {/* Main Right Content Workspace */}
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+        {/* Topbar: Title & Quick Barcode Scanner */}
+        <Navbar
+          storeProfile={storeProfile}
+          lowStockCount={lowStockCount}
+          onOpenScanner={() => {
+            setScannerCallback(null);
+            setIsScannerOpen(true);
+          }}
+          onGoToLowStock={() => setActiveTab('inventory')}
+          activeTab={activeTab}
+        />
 
-        {activeTab === 'inventory' && (
-          <InventoryTab
-            products={products}
-            categories={categories}
-            onAddProduct={handleAddProduct}
-            onUpdateProduct={handleUpdateProduct}
-            onDeleteProduct={handleDeleteProduct}
-            onAdjustStock={handleAdjustStock}
-            onOpenScannerForCode={(cb) => {
-              setScannerCallback(() => cb);
-              setIsScannerOpen(true);
-            }}
-          />
-        )}
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-y-auto w-full px-3 sm:px-6 py-3 sm:py-4">
+          {activeTab === 'pos' && (
+            <CashierTab
+              products={products}
+              categories={categories}
+              cartItems={cartItems}
+              cartDiscount={cartDiscount}
+              onAddToCart={handleAddToCart}
+              onUpdateQuantity={handleUpdateQuantity}
+              onUpdateItemDiscount={handleUpdateItemDiscount}
+              onUpdateCartDiscount={(d) => setCartDiscount(d)}
+              onClearCart={handleClearCart}
+              customerName={customerName}
+              setCustomerName={setCustomerName}
+              customerPhone={customerPhone}
+              setCustomerPhone={setCustomerPhone}
+              orderNote={orderNote}
+              setOrderNote={setOrderNote}
+              onConfirmPayment={handleConfirmPayment}
+              onOpenScanner={() => {
+                setScannerCallback(null);
+                setIsScannerOpen(true);
+              }}
+              storeProfile={storeProfile}
+            />
+          )}
 
-        {activeTab === 'reports' && (
-          <ReportsTab
-            transactions={transactions}
-            onVoidTransaction={handleVoidTransaction}
-            onViewReceipt={(tx) => {
-              setCompletedTransaction(tx);
-              setIsReceiptOpen(true);
-            }}
-          />
-        )}
+          {activeTab === 'inventory' && (
+            <InventoryTab
+              products={products}
+              categories={categories}
+              onAddProduct={handleAddProduct}
+              onUpdateProduct={handleUpdateProduct}
+              onDeleteProduct={handleDeleteProduct}
+              onAdjustStock={handleAdjustStock}
+              onOpenScannerForCode={(cb) => {
+                setScannerCallback(() => cb);
+                setIsScannerOpen(true);
+              }}
+            />
+          )}
 
-        {activeTab === 'settings' && (
-          <SettingsTab
-            storeProfile={storeProfile}
-            onUpdateStoreProfile={(p) => {
-              setStoreProfile(p);
-              saveStoredStoreProfile(p);
-            }}
-            onResetData={handleResetData}
-          />
-        )}
-      </main>
+          {activeTab === 'reports' && (
+            <ReportsTab
+              transactions={transactions}
+              onVoidTransaction={handleVoidTransaction}
+              onViewReceipt={(tx) => {
+                setCompletedTransaction(tx);
+                setIsReceiptOpen(true);
+              }}
+            />
+          )}
+
+          {activeTab === 'settings' && (
+            <SettingsTab
+              storeProfile={storeProfile}
+              onUpdateStoreProfile={(p) => {
+                setStoreProfile(p);
+                saveStoredStoreProfile(p);
+              }}
+              onResetData={handleResetData}
+              isDarkMode={isDarkMode}
+              onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
+            />
+          )}
+        </main>
+      </div>
 
       {/* Mobile Bottom Navigation (Only visible on mobile screens < md) */}
       <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 shadow-xl md:hidden transition-colors">
