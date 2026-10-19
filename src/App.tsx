@@ -308,7 +308,7 @@ export function App() {
         </div>
       )}
 
-      {/* Top Navbar */}
+      {/* Top Navbar with Integrated Desktop Navigation */}
       <Navbar
         storeProfile={storeProfile}
         lowStockCount={lowStockCount}
@@ -319,6 +319,8 @@ export function App() {
         onGoToLowStock={() => setActiveTab('inventory')}
         isDarkMode={isDarkMode}
         onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
       />
 
       {/* Main Tab View */}
@@ -375,8 +377,8 @@ export function App() {
         )}
       </main>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-gray-800 shadow-2xl sm:hidden transition-colors">
+      {/* Mobile/Tablet Bottom Navigation (Hidden on Desktop md:) */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-gray-800 shadow-2xl md:hidden transition-colors">
         <div className="grid grid-cols-4 h-16">
           <button
             onClick={() => setActiveTab('pos')}
@@ -422,62 +424,6 @@ export function App() {
           </button>
         </div>
       </nav>
-
-      {/* Desktop Floating Navigation Pill */}
-      <div className="hidden sm:flex fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-white/90 dark:bg-[#111827]/90 backdrop-blur-lg border border-gray-200/90 dark:border-gray-800 rounded-2xl p-1.5 shadow-2xl shadow-black/10 space-x-1.5 transition-colors">
-        <button
-          onClick={() => setActiveTab('pos')}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
-            activeTab === 'pos'
-              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
-          }`}
-        >
-          <ShoppingCart className="w-4 h-4" />
-          <span>Kasir (POS)</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('inventory')}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all relative ${
-            activeTab === 'inventory'
-              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
-          }`}
-        >
-          <Package className="w-4 h-4" />
-          <span>Katalog & Stok</span>
-          {lowStockCount > 0 && (
-            <span className="w-4 h-4 rounded-full bg-amber-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
-              {lowStockCount}
-            </span>
-          )}
-        </button>
-
-        <button
-          onClick={() => setActiveTab('reports')}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
-            activeTab === 'reports'
-              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
-          }`}
-        >
-          <BarChart3 className="w-4 h-4" />
-          <span>Laporan Finansial</span>
-        </button>
-
-        <button
-          onClick={() => setActiveTab('settings')}
-          className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
-            activeTab === 'settings'
-              ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
-          }`}
-        >
-          <Settings className="w-4 h-4" />
-          <span>Pengaturan Toko</span>
-        </button>
-      </div>
 
       {/* Cart Modal */}
       <CartModal

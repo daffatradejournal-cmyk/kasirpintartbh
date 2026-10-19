@@ -44,7 +44,7 @@ export const CashierTab: React.FC<Props> = ({
   const cartTotalPrice = cartItems.reduce((acc, it) => acc + it.subtotal, 0);
 
   return (
-    <div className="space-y-4 pb-28">
+    <div className="space-y-4 pb-36">
       {/* Sapaan Ramah Kasir */}
       <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-800 dark:via-teal-800 dark:to-cyan-900 rounded-2xl p-4 sm:p-5 text-white shadow-lg shadow-emerald-900/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
@@ -219,7 +219,7 @@ export const CashierTab: React.FC<Props> = ({
 
       {/* Floating Bottom Cart Bar */}
       {cartItems.length > 0 && (
-        <div className="fixed bottom-16 sm:bottom-6 left-4 right-4 max-w-4xl mx-auto z-30">
+        <div className="fixed bottom-20 md:bottom-6 left-4 right-4 max-w-4xl mx-auto z-30 animate-in fade-in slide-in-from-bottom-4 duration-200">
           <div
             onClick={onOpenCart}
             className="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 hover:from-emerald-950 hover:to-slate-950 text-white rounded-2xl p-4 shadow-2xl shadow-emerald-950/40 flex items-center justify-between cursor-pointer active:scale-[0.99] transition-all border border-emerald-500/30 backdrop-blur-lg"
