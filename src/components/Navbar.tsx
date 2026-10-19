@@ -35,65 +35,61 @@ export const Navbar: React.FC<Props> = ({
   onSelectTab,
 }) => {
   return (
-    <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md border-b border-gray-200/80 dark:border-gray-800 shadow-sm transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+    <header className="sticky top-0 z-40 bg-white/95 dark:bg-[#09090B]/95 backdrop-blur-md border-b border-zinc-200/80 dark:border-zinc-800/80 transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
         {/* Brand & Store Info */}
         <div className="flex items-center space-x-3 shrink-0">
-          <div className="relative">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 transform transition-transform hover:scale-105">
-              <Sparkles className="w-5 h-5 animate-pulse text-amber-200" />
-            </div>
-            <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-white dark:border-[#111827] rounded-full"></span>
+          <div className="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold shadow-xs">
+            <Sparkles className="w-4 h-4 text-emerald-100" />
           </div>
 
           <div>
             <div className="flex items-center space-x-2">
-              <h1 className="font-extrabold text-gray-900 dark:text-white text-base sm:text-lg leading-tight tracking-tight flex items-center gap-1.5">
-                <span>Kasir Pintar</span>
-                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-xs">
-                  PRO
-                </span>
-              </h1>
+              <span className="font-bold text-zinc-900 dark:text-zinc-100 text-base tracking-tight">
+                Kasir Pintar
+              </span>
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                PRO
+              </span>
             </div>
-            <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
-              <span className="font-semibold text-gray-800 dark:text-gray-200 truncate max-w-[120px] sm:max-w-none">
+            <div className="flex items-center space-x-1.5 text-xs text-zinc-500 dark:text-zinc-400">
+              <span className="truncate max-w-[120px] sm:max-w-none font-medium">
                 {storeProfile.storeName}
               </span>
-              <span className="hidden sm:inline text-gray-300 dark:text-gray-600">•</span>
-              <span className="hidden sm:inline-flex items-center text-emerald-600 dark:text-emerald-400 font-medium text-[11px]">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1 animate-ping"></span>
+              <span className="hidden sm:inline text-zinc-300 dark:text-zinc-600">•</span>
+              <span className="hidden sm:inline-flex items-center text-zinc-600 dark:text-zinc-300 font-medium text-[11px]">
                 {storeProfile.activeCashier}
               </span>
             </div>
           </div>
         </div>
 
-        {/* Desktop Main Navigation Tabs (Clean Header Positioning) */}
-        <nav className="hidden md:flex items-center space-x-1 bg-gray-100/90 dark:bg-gray-800/90 p-1.5 rounded-2xl border border-gray-200/60 dark:border-gray-700/60 shadow-xs">
+        {/* Desktop Main Navigation Tabs */}
+        <nav className="hidden md:flex items-center space-x-1 bg-zinc-100 dark:bg-zinc-900/90 p-1 rounded-xl border border-zinc-200/80 dark:border-zinc-800">
           <button
             onClick={() => onSelectTab('pos')}
-            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-black transition-all ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'pos'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20 scale-[1.02]'
-                : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/70 dark:hover:bg-gray-700/70'
+                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             }`}
           >
-            <ShoppingCart className="w-4 h-4" />
+            <ShoppingCart className="w-3.5 h-3.5" />
             <span>Kasir</span>
           </button>
 
           <button
             onClick={() => onSelectTab('inventory')}
-            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-black transition-all relative ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all relative ${
               activeTab === 'inventory'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20 scale-[1.02]'
-                : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/70 dark:hover:bg-gray-700/70'
+                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             }`}
           >
-            <Package className="w-4 h-4" />
+            <Package className="w-3.5 h-3.5" />
             <span>Katalog & Stok</span>
             {lowStockCount > 0 && (
-              <span className="w-4 h-4 rounded-full bg-amber-500 text-white text-[10px] font-black flex items-center justify-center shadow-xs">
+              <span className="w-4 h-4 rounded-full bg-amber-500 text-white text-[10px] font-bold flex items-center justify-center">
                 {lowStockCount}
               </span>
             )}
@@ -101,75 +97,75 @@ export const Navbar: React.FC<Props> = ({
 
           <button
             onClick={() => onSelectTab('reports')}
-            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-black transition-all ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'reports'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20 scale-[1.02]'
-                : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/70 dark:hover:bg-gray-700/70'
+                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             }`}
           >
-            <BarChart3 className="w-4 h-4" />
+            <BarChart3 className="w-3.5 h-3.5" />
             <span>Laporan</span>
           </button>
 
           <button
             onClick={() => onSelectTab('settings')}
-            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-black transition-all ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               activeTab === 'settings'
-                ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20 scale-[1.02]'
-                : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-white/70 dark:hover:bg-gray-700/70'
+                ? 'bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-xs'
+                : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100'
             }`}
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="w-3.5 h-3.5" />
             <span>Pengaturan</span>
           </button>
         </nav>
 
         {/* Action Controls & Badges */}
-        <div className="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
-          {/* Dark / Light Mode Toggle Button */}
+        <div className="flex items-center space-x-2 shrink-0">
+          {/* Dark / Light Mode Toggle */}
           <button
             onClick={onToggleDarkMode}
-            className="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/80 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-200 transition-all flex items-center space-x-1.5 text-xs font-bold active:scale-95"
+            className="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 transition-colors flex items-center space-x-1.5 text-xs font-semibold"
             title={isDarkMode ? 'Beralih ke Mode Terang' : 'Beralih ke Mode Gelap'}
           >
             {isDarkMode ? (
               <>
                 <Sun className="w-4 h-4 text-amber-400" />
-                <span className="hidden lg:inline text-amber-300">Terang</span>
+                <span className="hidden lg:inline text-zinc-200">Terang</span>
               </>
             ) : (
               <>
-                <Moon className="w-4 h-4 text-slate-600" />
+                <Moon className="w-4 h-4 text-zinc-600" />
                 <span className="hidden lg:inline">Gelap</span>
               </>
             )}
           </button>
 
-          {/* Low Stock Warning Pill */}
+          {/* Low Stock Warning */}
           {lowStockCount > 0 && (
             <button
               onClick={onGoToLowStock}
-              className="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/60 text-amber-700 dark:text-amber-400 rounded-xl border border-amber-200/80 dark:border-amber-800/60 transition-all text-xs font-bold shadow-xs active:scale-95"
+              className="flex items-center space-x-1.5 px-3 py-1.5 bg-amber-500/10 hover:bg-amber-500/15 text-amber-600 dark:text-amber-400 rounded-xl border border-amber-500/20 transition-colors text-xs font-semibold"
               title={`${lowStockCount} barang stok menipis`}
             >
               <AlertTriangle className="w-3.5 h-3.5 text-amber-500" />
               <span className="hidden xl:inline">Stok Menipis</span>
-              <span className="w-4 h-4 rounded-full bg-amber-500 text-white text-[10px] font-black flex items-center justify-center">
+              <span className="w-4 h-4 rounded-full bg-amber-500 text-white text-[10px] font-bold flex items-center justify-center">
                 {lowStockCount}
               </span>
             </button>
           )}
 
-          {/* 100% Offline-Ready Pill */}
-          <div className="hidden xl:flex items-center space-x-1.5 px-3 py-1.5 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 rounded-xl border border-emerald-200/60 dark:border-emerald-800/60 text-xs font-semibold">
-            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          {/* Offline-Ready */}
+          <div className="hidden xl:flex items-center space-x-1.5 px-3 py-1.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl border border-emerald-500/20 text-xs font-medium">
+            <ShieldCheck className="w-3.5 h-3.5" />
             <span>Offline-Ready</span>
           </div>
 
           {/* Barcode Quick Scanner */}
           <button
             onClick={onOpenScanner}
-            className="flex items-center space-x-1.5 px-3.5 sm:px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl shadow-md shadow-emerald-600/20 active:scale-95 transition-all text-xs font-bold"
+            className="flex items-center space-x-1.5 px-3.5 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-xs transition-colors text-xs font-semibold"
           >
             <QrCode className="w-4 h-4" />
             <span className="hidden sm:inline">Scan Barcode</span>

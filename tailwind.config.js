@@ -10,19 +10,24 @@ export default {
       colors: {
         primary: {
           DEFAULT: '#059669', // Emerald
-          dark: '#064E3B',
+          dark: '#047857',
           light: '#10B981',
-          container: '#D1FAE5',
+          accent: '#34D399',
+          muted: 'rgba(16, 185, 129, 0.1)',
         },
-        slate: {
-          darkBg: '#090D16',
-          darkCard: '#131B2E',
-          darkBorder: '#1E293B',
+        surface: {
+          lightBg: '#F8FAFC',
+          lightCard: '#FFFFFF',
+          lightBorder: '#E2E8F0',
+          darkBg: '#09090B', // True deep Zinc
+          darkCard: '#121215', // Premium surface
+          darkBorder: '#27272A', // Hairline Zinc-800
+          darkElevated: '#18181B', // Elevated layer
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       }
     },
   },

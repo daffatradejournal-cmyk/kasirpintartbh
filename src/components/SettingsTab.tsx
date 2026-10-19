@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StoreProfile } from '../types';
-import { Save, Store, User, GraduationCap, RotateCcw, Download, Sparkles } from 'lucide-react';
+import { Save, Store, User, GraduationCap, RotateCcw, Download, Check } from 'lucide-react';
 
 interface Props {
   storeProfile: StoreProfile;
@@ -50,99 +50,107 @@ export const SettingsTab: React.FC<Props> = ({
   };
 
   return (
-    <div className="space-y-6 pb-24 max-w-3xl mx-auto">
+    <div className="space-y-6 pb-24 max-w-2xl mx-auto">
       <div>
-        <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
-          <span>Pengaturan & Profil Toko</span>
-          <span className="p-1 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 rounded-lg text-xs font-black">
-            ⚙️ Setup
+        <div className="flex items-center gap-2.5">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+            Pengaturan & Profil Toko
+          </h2>
+          <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+            Setup
           </span>
-        </h2>
-        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mt-0.5">
+        </div>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400 font-normal mt-0.5">
           Atur nama usaha, kasir aktif bertugas, dan template cetak struk belanja
         </p>
       </div>
 
-      <form onSubmit={handleSave} className="space-y-5">
+      <form onSubmit={handleSave} className="space-y-4">
         {/* Store Profile Card */}
-        <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs space-y-4">
-          <div className="flex items-center space-x-2.5 pb-3 border-b border-gray-100 dark:border-gray-800 text-emerald-900 dark:text-emerald-300">
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-              <Store className="w-4 h-4" />
+        <div className="bg-white dark:bg-[#121215] p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs space-y-3.5">
+          <div className="flex items-center space-x-2.5 pb-3 border-b border-zinc-100 dark:border-zinc-800">
+            <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 flex items-center justify-center">
+              <Store className="w-4 h-4 stroke-[2]" />
             </div>
             <div>
-              <h3 className="font-extrabold text-sm">Identitas Usaha / Toko</h3>
-              <p className="text-[11px] text-gray-400 dark:text-gray-500">Dicetak di bagian atas setiap struk thermal</p>
+              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Identitas Usaha / Toko</h3>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400">Dicetak di bagian kepala setiap struk thermal</p>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">Nama Toko:</label>
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+              Nama Toko:
+            </label>
             <input
               type="text"
               required
               value={storeName}
               onChange={(e) => setStoreName(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-bold"
+              className="w-full px-3.5 py-2 text-xs border border-zinc-300 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-900/60 text-zinc-900 dark:text-zinc-100 rounded-lg outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 font-medium"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">Alamat Lengkap Toko:</label>
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+              Alamat Lengkap Toko:
+            </label>
             <textarea
               rows={2}
               required
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-medium"
+              className="w-full px-3.5 py-2 text-xs border border-zinc-300 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-900/60 text-zinc-900 dark:text-zinc-100 rounded-lg outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 font-normal"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
               Nomor WhatsApp / Kontak Toko:
             </label>
             <input
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-mono"
+              className="w-full px-3.5 py-2 text-xs border border-zinc-300 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-900/60 text-zinc-900 dark:text-zinc-100 rounded-lg outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
               Catatan Kaki Struk (Receipt Footer):
             </label>
             <textarea
               rows={2}
               value={receiptFooter}
               onChange={(e) => setReceiptFooter(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 text-xs"
+              className="w-full px-3.5 py-2 text-xs border border-zinc-300 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-900/60 text-zinc-900 dark:text-zinc-100 rounded-lg outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 font-normal"
             />
           </div>
         </div>
 
         {/* Cashier Info Card */}
-        <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs space-y-3">
-          <div className="flex items-center space-x-2.5 pb-3 border-b border-gray-100 dark:border-gray-800 text-emerald-900 dark:text-emerald-300">
-            <div className="w-8 h-8 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center">
-              <User className="w-4 h-4" />
+        <div className="bg-white dark:bg-[#121215] p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs space-y-3.5">
+          <div className="flex items-center space-x-2.5 pb-3 border-b border-zinc-100 dark:border-zinc-800">
+            <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 flex items-center justify-center">
+              <User className="w-4 h-4 stroke-[2]" />
             </div>
             <div>
-              <h3 className="font-extrabold text-sm">Petugas Kasir Bertugas</h3>
-              <p className="text-[11px] text-gray-400 dark:text-gray-500">Identitas kasir yang melayani transaksi</p>
+              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm">Petugas Kasir Bertugas</h3>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400">Identitas kasir yang melayani antrean transaksi</p>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">Nama Kasir Aktif:</label>
+            <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+              Nama Kasir Aktif:
+            </label>
             <input
               type="text"
               required
               value={activeCashier}
               onChange={(e) => setActiveCashier(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-bold"
+              className="w-full px-3.5 py-2 text-xs border border-zinc-300 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-900/60 text-zinc-900 dark:text-zinc-100 rounded-lg outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 font-medium"
             />
           </div>
         </div>
@@ -150,52 +158,55 @@ export const SettingsTab: React.FC<Props> = ({
         {/* Save CTA */}
         <button
           type="submit"
-          className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black rounded-2xl shadow-xl shadow-emerald-600/30 text-sm flex items-center justify-center space-x-2 transition-transform active:scale-95"
+          className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl text-xs shadow-xs flex items-center justify-center space-x-2 transition-colors active:scale-[0.99]"
         >
-          <Save className="w-4 h-4" />
-          <span>SIMPAN PENGATURAN TOKO</span>
+          <Save className="w-4 h-4 stroke-[2]" />
+          <span>Simpan Perubahan Pengaturan</span>
         </button>
 
         {isSaved && (
-          <div className="p-4 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-xs font-black text-center shadow-xs animate-in fade-in">
-            ✓ Pengaturan profil toko & kasir berhasil disimpan!
+          <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900/50 rounded-xl text-xs font-medium flex items-center justify-center gap-1.5 animate-in fade-in">
+            <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Pengaturan profil toko & kasir berhasil disimpan!</span>
           </div>
         )}
       </form>
 
       {/* Developer Profile Banner */}
-      <div className="bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 text-white rounded-3xl p-6 shadow-xl shadow-emerald-950/20 border border-emerald-500/30 flex items-start space-x-4">
-        <div className="p-3 bg-gradient-to-tr from-emerald-500 to-teal-400 text-white rounded-2xl shadow-md shrink-0">
-          <GraduationCap className="w-7 h-7" />
+      <div className="bg-white dark:bg-[#121215] rounded-xl p-5 shadow-xs border border-zinc-200/80 dark:border-zinc-800/80 flex items-start space-x-3.5">
+        <div className="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 flex items-center justify-center shrink-0">
+          <GraduationCap className="w-5 h-5 stroke-[2]" />
         </div>
-        <div>
-          <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 mb-1">
+        <div className="space-y-1">
+          <span className="inline-block px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
             Pengembang Sistem Kasir Pintar
           </span>
-          <h4 className="font-black text-base sm:text-lg text-white">Muhammad Daffa</h4>
-          <p className="text-xs text-emerald-300 font-semibold mt-0.5">
+          <h4 className="font-bold text-sm sm:text-base text-zinc-900 dark:text-zinc-100">
+            Muhammad Daffa
+          </h4>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 font-normal">
             S1 Sistem Informasi — Universitas Islam Indragiri (UNISI)
           </p>
-          <p className="text-[11px] text-gray-300 mt-2 leading-relaxed">
-            Kasir Pintar dikembangkan sebagai solusi digitalisasi UMKM ritel modern, toko kelontong, dan kios pasar untuk menghadirkan sistem kasir pintar cepat berbasis web dan mobile dengan kemampuan Offline-First tanpa tergantung sinyal internet.
+          <p className="text-xs text-zinc-600 dark:text-zinc-400 pt-1 leading-relaxed">
+            Kasir Pintar dirancang sebagai solusi kasir modern & kontrol inventaris cerdas untuk toko kelontong, kios pasar, dan pelaku UMKM ritel dengan kapabilitas Offline-First tanpa ketergantungan sinyal internet.
           </p>
         </div>
       </div>
 
       {/* Maintenance & Data Management */}
-      <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs space-y-3">
-        <h4 className="font-black text-xs text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-          Pencadangan & Pemulihan Data (Offline Storage)
+      <div className="bg-white dark:bg-[#121215] p-5 rounded-xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs space-y-3">
+        <h4 className="font-semibold text-xs text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
+          Penyimpanan & Pencadangan Data
         </h4>
 
-        <div className="flex flex-col sm:flex-row gap-2.5 pt-1">
+        <div className="flex flex-col sm:flex-row gap-2 pt-1">
           <button
             type="button"
             onClick={handleExportJson}
-            className="flex-1 py-3 px-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl text-xs font-black text-gray-700 dark:text-gray-200 flex items-center justify-center space-x-2 shadow-xs transition-colors"
+            className="flex-1 py-2.5 px-3.5 border border-zinc-200 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg text-xs font-medium text-zinc-700 dark:text-zinc-300 flex items-center justify-center space-x-2 transition-colors"
           >
-            <Download className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-            <span>Cadangkan Data (Backup JSON)</span>
+            <Download className="w-4 h-4 text-zinc-500" />
+            <span>Cadangkan Data (JSON)</span>
           </button>
 
           <button
@@ -209,10 +220,10 @@ export const SettingsTab: React.FC<Props> = ({
                 onResetData();
               }
             }}
-            className="flex-1 py-3 px-4 border border-rose-200 dark:border-rose-800/60 bg-white dark:bg-gray-800 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-2xl text-xs font-black text-rose-700 dark:text-rose-400 flex items-center justify-center space-x-2 shadow-xs transition-colors"
+            className="flex-1 py-2.5 px-3.5 border border-rose-200 dark:border-rose-900/50 bg-rose-50/50 dark:bg-rose-950/20 hover:bg-rose-100 dark:hover:bg-rose-900/40 rounded-lg text-xs font-medium text-rose-700 dark:text-rose-400 flex items-center justify-center space-x-2 transition-colors"
           >
-            <RotateCcw className="w-4 h-4" />
-            <span>Reset ke Data Demo Awal</span>
+            <RotateCcw className="w-4 h-4 text-rose-500" />
+            <span>Reset Data ke Demo</span>
           </button>
         </div>
       </div>

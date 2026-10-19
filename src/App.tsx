@@ -299,10 +299,10 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F8F7] dark:bg-[#090D16] flex flex-col font-sans text-gray-900 dark:text-gray-100 selection:bg-emerald-100 selection:text-emerald-950 transition-colors duration-200">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#09090B] flex flex-col font-sans text-zinc-900 dark:text-zinc-100 selection:bg-emerald-100 selection:text-emerald-950 transition-colors duration-150">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gray-900/95 backdrop-blur-md text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-2 border border-gray-700 animate-in fade-in slide-in-from-top-4">
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/95 dark:bg-zinc-800/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2 border border-zinc-700/60 dark:border-zinc-700 animate-in fade-in slide-in-from-top-4">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
@@ -378,12 +378,12 @@ export function App() {
       </main>
 
       {/* Mobile/Tablet Bottom Navigation (Hidden on Desktop md:) */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-gray-800 shadow-2xl md:hidden transition-colors">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 shadow-xl md:hidden transition-colors">
         <div className="grid grid-cols-4 h-16">
           <button
             onClick={() => setActiveTab('pos')}
             className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
-              activeTab === 'pos' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
+              activeTab === 'pos' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
             <ShoppingCart className="w-5 h-5" />
@@ -393,20 +393,20 @@ export function App() {
           <button
             onClick={() => setActiveTab('inventory')}
             className={`flex flex-col items-center justify-center space-y-1 relative transition-colors ${
-              activeTab === 'inventory' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
+              activeTab === 'inventory' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
             <Package className="w-5 h-5" />
             <span className="text-[10px]">Stok</span>
             {lowStockCount > 0 && (
-              <span className="absolute top-2 right-6 w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              <span className="absolute top-2 right-6 w-2 h-2 rounded-full bg-amber-500"></span>
             )}
           </button>
 
           <button
             onClick={() => setActiveTab('reports')}
             className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
-              activeTab === 'reports' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
+              activeTab === 'reports' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
             <BarChart3 className="w-5 h-5" />
@@ -416,7 +416,7 @@ export function App() {
           <button
             onClick={() => setActiveTab('settings')}
             className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
-              activeTab === 'settings' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
+              activeTab === 'settings' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
             <Settings className="w-5 h-5" />

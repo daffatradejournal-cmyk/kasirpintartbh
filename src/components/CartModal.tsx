@@ -50,54 +50,60 @@ export const CartModal: React.FC<Props> = ({
   const totalQty = items.reduce((acc, it) => acc + it.quantity, 0);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-      <div className="bg-white dark:bg-[#131B2E] rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col max-h-[92vh] border border-gray-100 dark:border-gray-800 transition-colors">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4">
+      <div className="bg-white dark:bg-[#121215] rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl flex flex-col max-h-[90vh] border border-zinc-200 dark:border-zinc-800 transition-colors animate-in fade-in zoom-in-95">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-100 dark:border-zinc-800">
           <div className="flex items-center space-x-2.5">
-            <div className="p-2 bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 rounded-xl">
-              <ShoppingCart className="w-5 h-5" />
+            <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 flex items-center justify-center">
+              <ShoppingCart className="w-4 h-4 stroke-[2]" />
             </div>
             <div>
-              <h3 className="font-extrabold text-gray-900 dark:text-white text-base">Keranjang Belanja</h3>
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">{totalQty} item produk</p>
+              <h3 className="font-bold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base">
+                Keranjang Belanja
+              </h3>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-mono">
+                {totalQty} item produk
+              </p>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1.5">
             {items.length > 0 && (
               <button
                 type="button"
                 onClick={onClearCart}
-                className="text-xs font-bold text-rose-600 hover:text-rose-700 px-2.5 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
+                className="text-xs font-medium text-rose-600 dark:text-rose-400 hover:text-rose-700 px-2.5 py-1 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors"
               >
                 Kosongkan
               </button>
             )}
             <button
               onClick={onClose}
-              className="p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-1.5 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4 stroke-[2]" />
             </button>
           </div>
         </div>
 
         {/* Items List */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-3 divide-y divide-gray-100 dark:divide-gray-800">
+        <div className="flex-1 overflow-y-auto p-4 space-y-2.5 divide-y divide-zinc-100 dark:divide-zinc-800/80">
           {items.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-400 dark:text-gray-500 text-sm font-semibold">Keranjang belanja kosong</p>
+              <p className="text-zinc-400 dark:text-zinc-500 text-xs font-medium">Keranjang belanja kosong</p>
             </div>
           ) : (
             items.map((item) => (
-              <div key={item.product.id} className="pt-3 first:pt-0 flex items-center justify-between">
+              <div key={item.product.id} className="pt-2.5 first:pt-0 flex items-center justify-between">
                 <div className="flex-1 min-w-0 pr-3">
-                  <h4 className="font-bold text-sm text-gray-900 dark:text-white truncate">{item.product.name}</h4>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                  <h4 className="font-semibold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 truncate">
+                    {item.product.name}
+                  </h4>
+                  <p className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
                     {formatRupiah(item.product.sellPrice)} / {item.product.unit}
                   </p>
                   {item.discount > 0 && (
-                    <span className="text-[10px] text-rose-600 dark:text-rose-400 font-bold bg-rose-50 dark:bg-rose-950/50 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] font-mono font-medium text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/40 px-1.5 py-0.5 rounded border border-rose-200/50 dark:border-rose-900/40">
                       Diskon: -{formatRupiah(item.discount)}
                     </span>
                   )}
@@ -105,28 +111,32 @@ export const CartModal: React.FC<Props> = ({
 
                 {/* Tactile Quantity Stepper */}
                 <div className="flex items-center space-x-2">
-                  <div className="flex items-center border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800 overflow-hidden shadow-inner">
+                  <div className="flex items-center border border-zinc-200 dark:border-zinc-700 rounded-lg bg-zinc-50 dark:bg-zinc-800/60 overflow-hidden">
                     <button
                       type="button"
                       onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
-                      className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+                      className="p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 transition-colors"
                     >
-                      {item.quantity <= 1 ? <Trash2 className="w-3.5 h-3.5 text-rose-500" /> : <Minus className="w-3.5 h-3.5" />}
+                      {item.quantity <= 1 ? (
+                        <Trash2 className="w-3.5 h-3.5 text-rose-500 stroke-[2]" />
+                      ) : (
+                        <Minus className="w-3.5 h-3.5 stroke-[2]" />
+                      )}
                     </button>
-                    <span className="px-3 font-mono font-bold text-xs text-gray-900 dark:text-white">
+                    <span className="px-2.5 font-mono font-bold text-xs tabular-nums text-zinc-900 dark:text-zinc-100">
                       {item.quantity}
                     </span>
                     <button
                       type="button"
                       onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
                       disabled={item.quantity >= item.product.stock}
-                      className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 disabled:opacity-30 transition-colors"
+                      className="p-1.5 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 disabled:opacity-30 transition-colors"
                     >
-                      <Plus className="w-3.5 h-3.5" />
+                      <Plus className="w-3.5 h-3.5 stroke-[2]" />
                     </button>
                   </div>
 
-                  <span className="w-20 text-right font-mono font-extrabold text-sm text-gray-900 dark:text-white">
+                  <span className="w-20 text-right font-mono font-bold text-xs sm:text-sm tabular-nums text-zinc-900 dark:text-zinc-100">
                     {formatRupiah(item.subtotal)}
                   </span>
                 </div>
@@ -136,48 +146,48 @@ export const CartModal: React.FC<Props> = ({
         </div>
 
         {/* Customer & Discount Controls */}
-        <div className="p-5 bg-gray-50 dark:bg-[#0E1524] border-t border-gray-100 dark:border-gray-800 space-y-3">
+        <div className="p-4 bg-zinc-50 dark:bg-zinc-900/60 border-t border-zinc-100 dark:border-zinc-800 space-y-2.5">
           {/* Customer inputs */}
           <div className="grid grid-cols-2 gap-2">
             <div className="relative">
-              <User className="w-3.5 h-3.5 absolute left-3 top-3 text-gray-400" />
+              <User className="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-400" />
               <input
                 type="text"
                 placeholder="Nama Pembeli (opsional)"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="w-full pl-8 pr-3 py-2 text-xs border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white outline-none focus:border-emerald-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="w-full pl-8 pr-3 py-1.5 text-xs border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 outline-none focus:border-emerald-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 font-medium"
               />
             </div>
             <div className="relative">
-              <Phone className="w-3.5 h-3.5 absolute left-3 top-3 text-gray-400" />
+              <Phone className="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-400" />
               <input
                 type="text"
                 placeholder="No WA (0812xxx)"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="w-full pl-8 pr-3 py-2 text-xs border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white outline-none focus:border-emerald-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+                className="w-full pl-8 pr-3 py-1.5 text-xs border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 outline-none focus:border-emerald-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 font-mono"
               />
             </div>
           </div>
 
           <div className="relative">
-            <StickyNote className="w-3.5 h-3.5 absolute left-3 top-3 text-gray-400" />
+            <StickyNote className="w-3.5 h-3.5 absolute left-3 top-2.5 text-zinc-400" />
             <input
               type="text"
               placeholder="Catatan pesanan..."
               value={orderNote}
               onChange={(e) => setOrderNote(e.target.value)}
-              className="w-full pl-8 pr-3 py-2 text-xs border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white outline-none focus:border-emerald-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              className="w-full pl-8 pr-3 py-1.5 text-xs border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 outline-none focus:border-emerald-500 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 font-normal"
             />
           </div>
 
           {/* Discount Global Toggle */}
-          <div className="flex items-center justify-between pt-1">
+          <div className="flex items-center justify-between pt-0.5">
             <button
               type="button"
               onClick={() => setShowDiscountInput(!showDiscountInput)}
-              className="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1 hover:underline"
+              className="text-xs font-medium text-emerald-600 dark:text-emerald-400 flex items-center space-x-1 hover:underline"
             >
               <Tag className="w-3.5 h-3.5" />
               <span>{cartDiscount > 0 ? `Diskon Nota: -${formatRupiah(cartDiscount)}` : '+ Tambah Diskon Nota'}</span>
@@ -186,7 +196,7 @@ export const CartModal: React.FC<Props> = ({
               <button
                 type="button"
                 onClick={() => onUpdateCartDiscount(0)}
-                className="text-[11px] text-rose-600 hover:underline"
+                className="text-[11px] text-rose-600 dark:text-rose-400 hover:underline"
               >
                 Hapus
               </button>
@@ -200,7 +210,7 @@ export const CartModal: React.FC<Props> = ({
                 placeholder="Nominal Diskon (Rp)"
                 value={discountVal}
                 onChange={(e) => setDiscountVal(e.target.value)}
-                className="flex-1 px-3 py-1.5 text-xs border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white outline-none"
+                className="flex-1 px-3 py-1.5 text-xs border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 outline-none font-mono"
               />
               <button
                 type="button"
@@ -208,7 +218,7 @@ export const CartModal: React.FC<Props> = ({
                   onUpdateCartDiscount(parseFloat(discountVal) || 0);
                   setShowDiscountInput(false);
                 }}
-                className="px-3.5 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold rounded-xl"
+                className="px-3.5 py-1.5 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-medium rounded-lg"
               >
                 Terapkan
               </button>
@@ -216,20 +226,22 @@ export const CartModal: React.FC<Props> = ({
           )}
 
           {/* Breakdown */}
-          <div className="pt-2 border-t border-gray-200 dark:border-gray-800 space-y-1 text-xs">
-            <div className="flex justify-between text-gray-600 dark:text-gray-400">
-              <span>Subtotal:</span>
-              <span className="font-mono">{formatRupiah(grossTotal)}</span>
+          <div className="pt-2 border-t border-zinc-200 dark:border-zinc-800 space-y-1 text-xs">
+            <div className="flex justify-between text-zinc-500 dark:text-zinc-400">
+              <span>Subtotal</span>
+              <span className="font-mono tabular-nums">{formatRupiah(grossTotal)}</span>
             </div>
             {totalDiscount > 0 && (
-              <div className="flex justify-between text-rose-600 dark:text-rose-400 font-semibold">
-                <span>Total Diskon:</span>
-                <span className="font-mono">-{formatRupiah(totalDiscount)}</span>
+              <div className="flex justify-between text-rose-600 dark:text-rose-400 font-medium">
+                <span>Diskon Nota</span>
+                <span className="font-mono tabular-nums">-{formatRupiah(totalDiscount)}</span>
               </div>
             )}
-            <div className="flex justify-between text-base font-extrabold text-gray-900 dark:text-white pt-1">
-              <span>Total Akhir:</span>
-              <span className="text-emerald-600 dark:text-emerald-400 font-mono">{formatRupiah(finalTotal)}</span>
+            <div className="flex justify-between text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 pt-1">
+              <span>Total Akhir</span>
+              <span className="font-mono tabular-nums text-emerald-600 dark:text-emerald-400">
+                {formatRupiah(finalTotal)}
+              </span>
             </div>
           </div>
 
@@ -241,9 +253,9 @@ export const CartModal: React.FC<Props> = ({
               onClose();
               onProceedToPayment();
             }}
-            className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-black rounded-2xl shadow-xl shadow-emerald-600/25 transition-all disabled:opacity-40 text-sm"
+            className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl shadow-xs transition-colors disabled:opacity-40 text-xs sm:text-sm active:scale-[0.99]"
           >
-            LANJUT PEMBAYARAN ({formatRupiah(finalTotal)})
+            Lanjut Pembayaran ({formatRupiah(finalTotal)})
           </button>
         </div>
       </div>
