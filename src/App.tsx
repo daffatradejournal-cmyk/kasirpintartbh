@@ -17,8 +17,6 @@ import { CashierTab } from './components/CashierTab';
 import { InventoryTab } from './components/InventoryTab';
 import { ReportsTab } from './components/ReportsTab';
 import { SettingsTab } from './components/SettingsTab';
-import { CartModal } from './components/CartModal';
-import { PaymentModal } from './components/PaymentModal';
 import { ReceiptModal } from './components/ReceiptModal';
 import { BarcodeScannerModal } from './components/BarcodeScannerModal';
 import { ShoppingCart, Package, BarChart3, Settings, CheckCircle2 } from 'lucide-react';
@@ -37,8 +35,6 @@ export function App() {
   const [orderNote, setOrderNote] = useState<string>('');
 
   // Modals
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isReceiptOpen, setIsReceiptOpen] = useState(false);
   const [isScannerOpen, setIsScannerOpen] = useState(false);
   const [scannerCallback, setScannerCallback] = useState<((code: string) => void) | null>(null);
@@ -211,7 +207,6 @@ export function App() {
       setProducts(getStoredProducts());
       setTransactions(getStoredTransactions());
       setCompletedTransaction(newTx);
-      setIsPaymentOpen(false);
       setIsReceiptOpen(true);
       handleClearCart();
     } else {
@@ -281,7 +276,7 @@ export function App() {
 
     if (found) {
       handleAddToCart(found);
-      showToast(`+1 ${found.name} ditambahkan ke keranjang`);
+      showToast(`+1 ${found.name} ditambahkan ke tiket kasir`);
     } else {
       showToast(`Barcode "${code}" belum terdaftar di katalog produk.`);
     }
@@ -302,7 +297,7 @@ export function App() {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#09090B] flex flex-col font-sans text-zinc-900 dark:text-zinc-100 selection:bg-emerald-100 selection:text-emerald-950 transition-colors duration-150">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/95 dark:bg-zinc-800/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2 border border-zinc-700/60 dark:border-zinc-700 animate-in fade-in slide-in-from-top-4">
+        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/95 dark:bg-zinc-800/95 backdrop-blur-md text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-xl flex items-center space-x-2 border border-zinc-700/60 dark:border-zinc-700 animate-in fade-in slide-in-from-top-4">
           <CheckCircle2 className="w-4 h-4 text-emerald-400" />
           <span>{toastMessage}</span>
         </div>
@@ -324,18 +319,30 @@ export function App() {
       />
 
       {/* Main Tab View */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-3 sm:px-5 lg:px-6 py-3 sm:py-4">
         {activeTab === 'pos' && (
           <CashierTab
             products={products}
+            categories={categories}
             cartItems={cartItems}
+            cartDiscount={cartDiscount}
             onAddToCart={handleAddToCart}
-            onOpenCart={() => setIsCartOpen(true)}
+            onUpdateQuantity={handleUpdateQuantity}
+            onUpdateItemDiscount={handleUpdateItemDiscount}
+            onUpdateCartDiscount={(d) => setCartDiscount(d)}
+            onClearCart={handleClearCart}
+            customerName={customerName}
+            setCustomerName={setCustomerName}
+            customerPhone={customerPhone}
+            setCustomerPhone={setCustomerPhone}
+            orderNote={orderNote}
+            setOrderNote={setOrderNote}
+            onConfirmPayment={handleConfirmPayment}
             onOpenScanner={() => {
               setScannerCallback(null);
               setIsScannerOpen(true);
             }}
-            categories={categories}
+            storeProfile={storeProfile}
           />
         )}
 
@@ -377,82 +384,55 @@ export function App() {
         )}
       </main>
 
-      {/* Mobile/Tablet Bottom Navigation (Hidden on Desktop md:) */}
+      {/* Mobile Bottom Navigation (Only visible on mobile screens < md) */}
       <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#121215]/95 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 shadow-xl md:hidden transition-colors">
-        <div className="grid grid-cols-4 h-16">
+        <div className="grid grid-cols-4 h-14">
           <button
             onClick={() => setActiveTab('pos')}
-            className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
+            className={`flex flex-col items-center justify-center space-y-0.5 transition-colors ${
               activeTab === 'pos' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
-            <ShoppingCart className="w-5 h-5" />
+            <ShoppingCart className="w-4 h-4" />
             <span className="text-[10px]">Kasir</span>
           </button>
 
           <button
             onClick={() => setActiveTab('inventory')}
-            className={`flex flex-col items-center justify-center space-y-1 relative transition-colors ${
+            className={`flex flex-col items-center justify-center space-y-0.5 relative transition-colors ${
               activeTab === 'inventory' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
-            <Package className="w-5 h-5" />
+            <Package className="w-4 h-4" />
             <span className="text-[10px]">Stok</span>
             {lowStockCount > 0 && (
-              <span className="absolute top-2 right-6 w-2 h-2 rounded-full bg-amber-500"></span>
+              <span className="absolute top-1.5 right-6 w-2 h-2 rounded-full bg-amber-500"></span>
             )}
           </button>
 
           <button
             onClick={() => setActiveTab('reports')}
-            className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
+            className={`flex flex-col items-center justify-center space-y-0.5 transition-colors ${
               activeTab === 'reports' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
-            <BarChart3 className="w-5 h-5" />
+            <BarChart3 className="w-4 h-4" />
             <span className="text-[10px]">Laporan</span>
           </button>
 
           <button
             onClick={() => setActiveTab('settings')}
-            className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
+            className={`flex flex-col items-center justify-center space-y-0.5 transition-colors ${
               activeTab === 'settings' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
             }`}
           >
-            <Settings className="w-5 h-5" />
+            <Settings className="w-4 h-4" />
             <span className="text-[10px]">Toko</span>
           </button>
         </div>
       </nav>
 
-      {/* Cart Modal */}
-      <CartModal
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        items={cartItems}
-        cartDiscount={cartDiscount}
-        onUpdateQuantity={handleUpdateQuantity}
-        onUpdateItemDiscount={handleUpdateItemDiscount}
-        onUpdateCartDiscount={(d) => setCartDiscount(d)}
-        onClearCart={handleClearCart}
-        customerName={customerName}
-        setCustomerName={setCustomerName}
-        customerPhone={customerPhone}
-        setCustomerPhone={setCustomerPhone}
-        orderNote={orderNote}
-        setOrderNote={setOrderNote}
-        onProceedToPayment={() => setIsPaymentOpen(true)}
-      />
-
-      {/* Payment Modal */}
-      <PaymentModal
-        isOpen={isPaymentOpen}
-        onClose={() => setIsPaymentOpen(false)}
-        cartTotal={cartFinalTotal}
-        onConfirmPayment={handleConfirmPayment}
-      />
-
-      {/* Receipt Modal */}
+      {/* Receipt Modal (Shown on Successful Checkout or Re-print) */}
       {completedTransaction && (
         <ReceiptModal
           isOpen={isReceiptOpen}
