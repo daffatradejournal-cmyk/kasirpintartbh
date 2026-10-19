@@ -75,3 +75,6 @@ Jalankan di terminal:
 npx vercel
 ```
 Ikuti instruksi singkat di layar untuk langsung online.
+
+# studikasusduakasirporopantai
+
