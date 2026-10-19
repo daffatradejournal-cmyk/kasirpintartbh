@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Product, CartItem } from '../types';
 import { formatRupiah } from '../utils/formatters';
-import { Search, QrCode, ShoppingBag, Plus, Sparkles, ArrowRight } from 'lucide-react';
+import { Search, QrCode, ShoppingBag, Plus, ArrowRight } from 'lucide-react';
 
 interface Props {
   products: Product[];
@@ -45,8 +45,8 @@ export const CashierTab: React.FC<Props> = ({
 
   return (
     <div className="space-y-4 pb-28">
-      {/* Banner Sapaan Ramah Kasir */}
-      <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 rounded-2xl p-4 sm:p-5 text-white shadow-lg shadow-emerald-900/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+      {/* Sapaan Ramah Kasir */}
+      <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-800 dark:via-teal-800 dark:to-cyan-900 rounded-2xl p-4 sm:p-5 text-white shadow-lg shadow-emerald-900/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
         <div>
           <div className="flex items-center space-x-2">
             <span className="text-xl">👋</span>
@@ -54,16 +54,16 @@ export const CashierTab: React.FC<Props> = ({
               Selamat Melayani Pelanggan!
             </h2>
           </div>
-          <p className="text-xs text-emerald-100 mt-1 max-w-xl">
+          <p className="text-xs text-emerald-100 dark:text-emerald-200 mt-1 max-w-xl">
             Pilih produk dari katalog atau scan barcode barang dengan kamera untuk transaksi cepat tanpa antrean.
           </p>
         </div>
 
         <button
           onClick={onOpenScanner}
-          className="px-4 py-2 bg-white text-emerald-800 hover:bg-emerald-50 rounded-xl font-extrabold text-xs shadow-md flex items-center space-x-2 transition-transform active:scale-95 shrink-0"
+          className="px-4 py-2 bg-white dark:bg-gray-900 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-50 rounded-xl font-extrabold text-xs shadow-md flex items-center space-x-2 transition-transform active:scale-95 shrink-0"
         >
-          <QrCode className="w-4 h-4 text-emerald-600" />
+          <QrCode className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
           <span>Scan Kamera Kasir</span>
         </button>
       </div>
@@ -76,12 +76,12 @@ export const CashierTab: React.FC<Props> = ({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Cari nama barang cepat atau ketik barcode..."
-          className="w-full pl-11 pr-10 py-3 bg-white border border-gray-200/90 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 shadow-xs transition-all font-medium"
+          className="w-full pl-11 pr-10 py-3 bg-white dark:bg-[#131B2E] border border-gray-200/90 dark:border-gray-800 rounded-2xl text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 shadow-xs transition-all font-medium"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute right-3.5 top-3.5 text-xs text-gray-400 hover:text-gray-600 font-bold bg-gray-100 rounded-full w-5 h-5 flex items-center justify-center"
+            className="absolute right-3.5 top-3.5 text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 font-bold bg-gray-100 dark:bg-gray-800 rounded-full w-5 h-5 flex items-center justify-center"
           >
             ✕
           </button>
@@ -101,7 +101,7 @@ export const CashierTab: React.FC<Props> = ({
               className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 select-none ${
                 isSelected
                   ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20 scale-[1.02]'
-                  : 'bg-white border border-gray-200/80 text-gray-700 hover:bg-gray-50/80'
+                  : 'bg-white dark:bg-[#131B2E] border border-gray-200/80 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50/80 dark:hover:bg-gray-800'
               }`}
             >
               <span className="text-sm">{icon}</span>
@@ -113,12 +113,12 @@ export const CashierTab: React.FC<Props> = ({
 
       {/* Product Catalog Grid */}
       {filteredProducts.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-gray-300 p-8 shadow-xs">
-          <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-3">
+        <div className="text-center py-16 bg-white dark:bg-[#131B2E] rounded-3xl border border-dashed border-gray-300 dark:border-gray-800 p-8 shadow-xs">
+          <div className="w-16 h-16 rounded-full bg-emerald-50 dark:bg-emerald-950/40 flex items-center justify-center mx-auto mb-3">
             <ShoppingBag className="w-8 h-8 text-emerald-400" />
           </div>
-          <h3 className="font-extrabold text-gray-800 text-base">Produk Tidak Ditemukan</h3>
-          <p className="text-xs text-gray-500 mt-1 max-w-sm mx-auto">
+          <h3 className="font-extrabold text-gray-800 dark:text-white text-base">Produk Tidak Ditemukan</h3>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 max-w-sm mx-auto">
             Barang dengan kata kunci tersebut tidak ada di katalog. Coba cari kata kunci lain atau tambahkan di menu Stok Barang.
           </p>
         </div>
@@ -134,15 +134,15 @@ export const CashierTab: React.FC<Props> = ({
               <div
                 key={product.id}
                 onClick={() => !isOutOfStock && onAddToCart(product)}
-                className={`group relative bg-white border rounded-2xl p-3.5 flex flex-col justify-between transition-all duration-200 select-none ${
+                className={`group relative bg-white dark:bg-[#131B2E] border rounded-2xl p-3.5 flex flex-col justify-between transition-all duration-200 select-none ${
                   isOutOfStock
-                    ? 'opacity-60 border-gray-200 bg-gray-50/80 cursor-not-allowed'
-                    : 'border-gray-200/90 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 cursor-pointer active:scale-[0.98]'
+                    ? 'opacity-60 border-gray-200 dark:border-gray-800 bg-gray-50/80 dark:bg-gray-900 cursor-not-allowed'
+                    : 'border-gray-200/90 dark:border-gray-800 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/5 cursor-pointer active:scale-[0.98]'
                 }`}
               >
                 {/* Header Card: Emoji Avatar & Stock Badge */}
                 <div className="flex items-start justify-between gap-1 mb-2">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-50 to-teal-50 border border-emerald-100/80 flex items-center justify-center text-2xl shadow-xs group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/40 border border-emerald-100/80 dark:border-emerald-800/40 flex items-center justify-center text-2xl shadow-xs group-hover:scale-105 transition-transform">
                     {product.emoji || '📦'}
                   </div>
 
@@ -150,10 +150,10 @@ export const CashierTab: React.FC<Props> = ({
                     <span
                       className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black tracking-tight ${
                         isOutOfStock
-                          ? 'bg-rose-100 text-rose-700'
+                          ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400'
                           : isLowStock
-                          ? 'bg-amber-100 text-amber-800'
-                          : 'bg-emerald-100/70 text-emerald-800'
+                          ? 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-400'
+                          : 'bg-emerald-100/70 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300'
                       }`}
                     >
                       {isOutOfStock ? (
@@ -180,19 +180,19 @@ export const CashierTab: React.FC<Props> = ({
 
                 {/* Body Card: Name & Code */}
                 <div className="my-1.5 flex-1">
-                  <h4 className="font-bold text-gray-900 text-xs sm:text-sm line-clamp-2 leading-snug group-hover:text-emerald-700 transition-colors">
+                  <h4 className="font-bold text-gray-900 dark:text-white text-xs sm:text-sm line-clamp-2 leading-snug group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                     {product.name}
                   </h4>
-                  <p className="font-mono text-[10px] text-gray-400 mt-1">
+                  <p className="font-mono text-[10px] text-gray-400 dark:text-gray-500 mt-1">
                     {product.code} • {product.unit}
                   </p>
                 </div>
 
                 {/* Footer Card: Price & Add Button */}
-                <div className="pt-2.5 border-t border-gray-100 flex items-center justify-between mt-2">
+                <div className="pt-2.5 border-t border-gray-100 dark:border-gray-800/80 flex items-center justify-between mt-2">
                   <div className="flex flex-col">
-                    <span className="text-[10px] text-gray-400 font-medium">Harga</span>
-                    <span className="font-extrabold text-emerald-800 font-mono text-sm sm:text-base leading-tight">
+                    <span className="text-[10px] text-gray-400 dark:text-gray-500 font-medium">Harga</span>
+                    <span className="font-extrabold text-emerald-800 dark:text-emerald-400 font-mono text-sm sm:text-base leading-tight">
                       {formatRupiah(product.sellPrice)}
                     </span>
                   </div>
@@ -202,10 +202,10 @@ export const CashierTab: React.FC<Props> = ({
                     disabled={isOutOfStock}
                     className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
                       isOutOfStock
-                        ? 'bg-gray-100 text-gray-300'
+                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-300 dark:text-gray-600'
                         : inCartQty > 0
                         ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
-                        : 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white'
+                        : 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 group-hover:bg-emerald-600 group-hover:text-white'
                     }`}
                   >
                     <Plus className="w-4 h-4 stroke-[3]" />

@@ -83,28 +83,28 @@ export const ReceiptModal: React.FC<Props> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/65 backdrop-blur-md p-4 overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl flex flex-col my-4 border border-gray-100 animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white dark:bg-[#131B2E] rounded-3xl max-w-md w-full overflow-hidden shadow-2xl flex flex-col my-4 border border-gray-100 dark:border-gray-800 animate-in fade-in zoom-in-95 duration-200 transition-colors">
         {/* Modal Celebration Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-100 bg-gradient-to-r from-emerald-50 to-teal-50">
-          <div className="flex items-center space-x-2 text-emerald-900">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-emerald-100 dark:border-gray-800 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/40 dark:to-teal-950/40">
+          <div className="flex items-center space-x-2 text-emerald-900 dark:text-emerald-300">
             <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-xs">
               <Sparkles className="w-4 h-4 text-amber-200" />
             </div>
             <div>
               <span className="font-extrabold text-sm block">Transaksi Berhasil!</span>
-              <span className="text-[11px] text-emerald-700 font-medium">Stok barang otomatis terpotong</span>
+              <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium">Stok barang otomatis terpotong</span>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-gray-700 rounded-xl hover:bg-white transition-colors"
+            className="p-1.5 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 rounded-xl hover:bg-white dark:hover:bg-gray-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Realistic Thermal Paper with Jagged Sawtooth Edge */}
-        <div className="p-6 bg-gray-100/80 flex justify-center">
+        <div className="p-6 bg-gray-100/80 dark:bg-gray-900/80 flex justify-center">
           <div
             id="printable-receipt"
             className="receipt-paper w-full max-w-[340px] p-6 rounded-sm font-mono text-xs text-gray-950 leading-relaxed border-t-2 border-b-2 border-dashed border-gray-300"
@@ -212,7 +212,7 @@ export const ReceiptModal: React.FC<Props> = ({
         </div>
 
         {/* Modal Action Buttons */}
-        <div className="p-4 bg-white border-t border-gray-100 flex flex-col sm:flex-row gap-2">
+        <div className="p-4 bg-white dark:bg-[#131B2E] border-t border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row gap-2">
           <button
             type="button"
             onClick={handleShareWhatsApp}
@@ -232,7 +232,7 @@ export const ReceiptModal: React.FC<Props> = ({
           <button
             type="button"
             onClick={onNewTransaction}
-            className="py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-2xl font-black text-xs flex items-center justify-center space-x-1.5 transition-colors"
+            className="py-3 px-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-2xl font-black text-xs flex items-center justify-center space-x-1.5 transition-colors"
           >
             <PlusCircle className="w-4 h-4" />
             <span>Baru</span>

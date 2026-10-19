@@ -4,30 +4,20 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#0F766E', // Ocean Teal
-          dark: '#042F2E',
-          light: '#14B8A6',
-          container: '#CCFBF1',
-        },
-        emerald: {
-          accent: '#10B981',
-        },
-        amber: {
-          accent: '#F59E0B',
-        },
-        rose: {
-          accent: '#E11D48',
-        },
-        cream: {
-          paper: '#FDFBF7',
-          surface: '#F8FAF9',
+          DEFAULT: '#059669', // Emerald
+          dark: '#064E3B',
+          light: '#10B981',
+          container: '#D1FAE5',
         },
         slate: {
-          dark: '#0F172A',
+          darkBg: '#090D16',
+          darkCard: '#131B2E',
+          darkBorder: '#1E293B',
         }
       },
       fontFamily: {

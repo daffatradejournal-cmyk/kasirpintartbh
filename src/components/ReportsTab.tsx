@@ -110,19 +110,19 @@ export const ReportsTab: React.FC<Props> = ({
       {/* Header Toolbar */}
       <div className="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
         <div>
-          <h2 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight flex items-center gap-2">
+          <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>Laporan Finansial & Omzet</span>
-            <span className="p-1.5 bg-amber-100 text-amber-800 rounded-xl text-xs font-black">
+            <span className="p-1.5 bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 rounded-xl text-xs font-black">
               📊 Live
             </span>
           </h2>
-          <p className="text-xs text-gray-500 font-medium mt-0.5">
+          <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mt-0.5">
             Analisis laba bersih transparan, omzet penjualan, dan riwayat nota transaksi
           </p>
         </div>
 
         {/* Period Segmented Buttons */}
-        <div className="flex bg-gray-100/90 p-1.5 rounded-2xl text-xs font-black">
+        <div className="flex bg-gray-100/90 dark:bg-gray-800/80 p-1.5 rounded-2xl text-xs font-black">
           {(['TODAY', 'WEEK', 'MONTH', 'ALL'] as const).map((period) => {
             const labels = { TODAY: 'Hari Ini', WEEK: '7 Hari', MONTH: 'Bulan Ini', ALL: 'Semua' };
             const active = filterPeriod === period;
@@ -132,8 +132,8 @@ export const ReportsTab: React.FC<Props> = ({
                 onClick={() => setFilterPeriod(period)}
                 className={`px-3.5 py-2 rounded-xl transition-all ${
                   active
-                    ? 'bg-white text-emerald-800 shadow-md shadow-black/5 scale-[1.02]'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-white dark:bg-[#131B2E] text-emerald-800 dark:text-emerald-300 shadow-md shadow-black/5 dark:shadow-black/20 scale-[1.02]'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                 }`}
               >
                 {labels[period]}
@@ -162,75 +162,75 @@ export const ReportsTab: React.FC<Props> = ({
         </div>
 
         {/* Laba Bersih */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-200/80 shadow-xs flex flex-col justify-between hover:border-emerald-500/50 transition-colors">
-          <div className="flex items-center justify-between text-emerald-800">
+        <div className="bg-white dark:bg-[#131B2E] p-5 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col justify-between hover:border-emerald-500/50 transition-colors">
+          <div className="flex items-center justify-between text-emerald-800 dark:text-emerald-300">
             <span className="text-xs font-black uppercase tracking-wider">Laba Bersih</span>
-            <div className="p-2.5 bg-emerald-50 rounded-2xl">
-              <TrendingUp className="w-5 h-5 text-emerald-600" />
+            <div className="p-2.5 bg-emerald-50 dark:bg-emerald-950/50 rounded-2xl">
+              <TrendingUp className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             </div>
           </div>
           <div className="mt-4">
-            <p className="text-2xl sm:text-3xl font-black font-mono text-emerald-700">
+            <p className="text-2xl sm:text-3xl font-black font-mono text-emerald-700 dark:text-emerald-400">
               {formatRupiah(netProfit)}
             </p>
-            <p className="text-[11px] text-gray-500 mt-1 flex items-center gap-1">
-              <span className="text-emerald-600 font-extrabold">+{profitMarginPercent.toFixed(1)}%</span>
+            <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1 flex items-center gap-1">
+              <span className="text-emerald-600 dark:text-emerald-400 font-extrabold">+{profitMarginPercent.toFixed(1)}%</span>
               <span>margin keuntungan</span>
             </p>
           </div>
         </div>
 
         {/* Total Transaksi */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-200/80 shadow-xs flex flex-col justify-between hover:border-teal-500/50 transition-colors">
-          <div className="flex items-center justify-between text-teal-800">
+        <div className="bg-white dark:bg-[#131B2E] p-5 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col justify-between hover:border-teal-500/50 transition-colors">
+          <div className="flex items-center justify-between text-teal-800 dark:text-teal-300">
             <span className="text-xs font-black uppercase tracking-wider">Total Nota</span>
-            <div className="p-2.5 bg-teal-50 rounded-2xl">
-              <Receipt className="w-5 h-5 text-teal-600" />
+            <div className="p-2.5 bg-teal-50 dark:bg-teal-950/50 rounded-2xl">
+              <Receipt className="w-5 h-5 text-teal-600 dark:text-teal-400" />
             </div>
           </div>
           <div className="mt-4">
-            <p className="text-2xl sm:text-3xl font-black font-mono text-gray-900">
+            <p className="text-2xl sm:text-3xl font-black font-mono text-gray-900 dark:text-white">
               {validTransactions.length}{' '}
-              <span className="text-sm font-semibold text-gray-400">Transaksi</span>
+              <span className="text-sm font-semibold text-gray-400 dark:text-gray-500">Transaksi</span>
             </p>
-            <p className="text-[11px] text-gray-500 mt-1">Nota lunas berhasil</p>
+            <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">Nota lunas berhasil</p>
           </div>
         </div>
 
         {/* Metode Pembayaran */}
-        <div className="bg-white p-5 rounded-3xl border border-gray-200/80 shadow-xs flex flex-col justify-between">
-          <div className="flex items-center justify-between text-purple-800">
+        <div className="bg-white dark:bg-[#131B2E] p-5 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs flex flex-col justify-between">
+          <div className="flex items-center justify-between text-purple-800 dark:text-purple-300">
             <span className="text-xs font-black uppercase tracking-wider">Metode Bayar</span>
-            <div className="p-2.5 bg-purple-50 rounded-2xl">
-              <CreditCard className="w-5 h-5 text-purple-600" />
+            <div className="p-2.5 bg-purple-50 dark:bg-purple-950/50 rounded-2xl">
+              <CreditCard className="w-5 h-5 text-purple-600 dark:text-purple-400" />
             </div>
           </div>
           <div className="mt-3 space-y-1 text-xs">
             <div className="flex justify-between font-mono font-medium py-0.5">
-              <span className="text-gray-500">💵 Tunai:</span>
-              <span className="font-black text-gray-900">{formatRupiah(cashTotal)}</span>
+              <span className="text-gray-500 dark:text-gray-400">💵 Tunai:</span>
+              <span className="font-black text-gray-900 dark:text-white">{formatRupiah(cashTotal)}</span>
             </div>
             <div className="flex justify-between font-mono font-medium py-0.5">
-              <span className="text-gray-500">📱 QRIS:</span>
-              <span className="font-black text-teal-700">{formatRupiah(qrisTotal)}</span>
+              <span className="text-gray-500 dark:text-gray-400">📱 QRIS:</span>
+              <span className="font-black text-teal-700 dark:text-teal-400">{formatRupiah(qrisTotal)}</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Top 5 Best Sellers Podium */}
-      <div className="bg-white p-6 rounded-3xl border border-gray-200/80 shadow-xs">
+      <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700">
+            <div className="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950/60 flex items-center justify-center text-amber-700 dark:text-amber-300">
               <Trophy className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-black text-gray-900 text-base">Top 5 Produk Terlaris (Best Seller)</h3>
-              <p className="text-[11px] text-gray-400 font-medium">Berdasarkan kuantitas penjualan tertinggi</p>
+              <h3 className="font-black text-gray-900 dark:text-white text-base">Top 5 Produk Terlaris (Best Seller)</h3>
+              <p className="text-[11px] text-gray-400 dark:text-gray-500 font-medium">Berdasarkan kuantitas penjualan tertinggi</p>
             </div>
           </div>
-          <span className="text-xs font-extrabold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+          <span className="text-xs font-extrabold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">
             🔥 Paling Cepat Laku
           </span>
         </div>
@@ -246,17 +246,17 @@ export const ReportsTab: React.FC<Props> = ({
               const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
 
               return (
-                <div key={item.name} className="space-y-1.5 p-3 rounded-2xl hover:bg-gray-50/80 transition-colors">
+                <div key={item.name} className="space-y-1.5 p-3 rounded-2xl hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
                   <div className="flex justify-between items-center text-xs">
-                    <span className="font-extrabold text-gray-900 flex items-center gap-2">
+                    <span className="font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                       <span className="text-base">{medals[idx]}</span>
                       <span>{item.name}</span>
                     </span>
-                    <span className="font-black font-mono text-emerald-800">
+                    <span className="font-black font-mono text-emerald-800 dark:text-emerald-400">
                       {item.qty} pcs • {formatRupiah(item.revenue)}
                     </span>
                   </div>
-                  <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                  <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2.5 overflow-hidden">
                     <div
                       className="bg-gradient-to-r from-emerald-500 to-teal-400 h-2.5 rounded-full transition-all duration-500 shadow-xs"
                       style={{ width: `${progress}%` }}
@@ -270,12 +270,12 @@ export const ReportsTab: React.FC<Props> = ({
       </div>
 
       {/* Transaction History Section */}
-      <div className="bg-white rounded-3xl border border-gray-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#131B2E] rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs overflow-hidden">
         {/* Header */}
-        <div className="p-5 sm:p-6 border-b border-gray-100 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
+        <div className="p-5 sm:p-6 border-b border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center">
           <div>
-            <h3 className="font-black text-gray-900 text-lg">Riwayat Nota Belanja</h3>
-            <p className="text-xs text-gray-500 font-medium">
+            <h3 className="font-black text-gray-900 dark:text-white text-lg">Riwayat Nota Belanja</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
               Cetak ulang struk digital atau batalkan nota salah input (*void*)
             </p>
           </div>
@@ -288,14 +288,14 @@ export const ReportsTab: React.FC<Props> = ({
                 placeholder="Cari nomor nota / pembeli..."
                 value={searchInvoice}
                 onChange={(e) => setSearchInvoice(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 rounded-xl outline-none focus:border-emerald-500 font-medium"
+                className="w-full pl-9 pr-3 py-2 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-medium placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
             </div>
 
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as any)}
-              className="px-3.5 py-2 text-xs border border-gray-200 rounded-xl bg-white font-extrabold text-gray-700 outline-none"
+              className="px-3.5 py-2 text-xs border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 font-extrabold text-gray-700 dark:text-gray-200 outline-none"
             >
               <option value="ALL">Semua</option>
               <option value="SUCCESS">Berhasil</option>
@@ -305,7 +305,7 @@ export const ReportsTab: React.FC<Props> = ({
         </div>
 
         {/* Transaction Rows */}
-        <div className="divide-y divide-gray-100">
+        <div className="divide-y divide-gray-100 dark:divide-gray-800">
           {displayedHistory.length === 0 ? (
             <div className="text-center py-16 text-gray-400 text-xs font-bold">
               Tidak ada data riwayat nota transaksi.
@@ -315,53 +315,53 @@ export const ReportsTab: React.FC<Props> = ({
               <div
                 key={tx.id}
                 className={`p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors ${
-                  tx.isVoid ? 'bg-gray-50/80 opacity-70' : 'hover:bg-gray-50/50'
+                  tx.isVoid ? 'bg-gray-50/80 dark:bg-gray-900/40 opacity-70' : 'hover:bg-gray-50/50 dark:hover:bg-gray-800/40'
                 }`}
               >
                 {/* Left Info */}
                 <div className="space-y-1">
                   <div className="flex items-center space-x-2">
-                    <span className="font-mono font-black text-sm text-gray-900">
+                    <span className="font-mono font-black text-sm text-gray-900 dark:text-white">
                       {tx.invoiceNumber}
                     </span>
                     <span
                       className={`text-[10px] font-black px-2.5 py-0.5 rounded-full ${
                         tx.isVoid
-                          ? 'bg-rose-100 text-rose-800'
+                          ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-800 dark:text-rose-400'
                           : tx.paymentMethod === 'CASH'
-                          ? 'bg-emerald-100 text-emerald-900'
-                          : 'bg-teal-100 text-teal-900'
+                          ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300'
+                          : 'bg-teal-100 dark:bg-teal-950/60 text-teal-900 dark:text-teal-300'
                       }`}
                     >
                       {tx.isVoid ? 'VOID (BATAL)' : tx.paymentMethod}
                     </span>
                   </div>
-                  <p className="text-[11px] text-gray-500 font-medium">
+                  <p className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">
                     {formatDateTime(tx.createdAt)} • Kasir: {tx.cashierName}
                     {tx.customerName && ` • Pelanggan: ${tx.customerName}`}
                   </p>
-                  <p className="text-xs text-gray-700 line-clamp-1 font-medium">
+                  <p className="text-xs text-gray-700 dark:text-gray-300 line-clamp-1 font-medium">
                     {tx.items.map((i) => `${i.productName} (${i.quantity}x)`).join(', ')}
                   </p>
                 </div>
 
                 {/* Right Price & Actions */}
-                <div className="flex items-center justify-between sm:justify-end space-x-4 border-t sm:border-t-0 pt-3 sm:pt-0">
+                <div className="flex items-center justify-between sm:justify-end space-x-4 border-t sm:border-t-0 dark:border-gray-800 pt-3 sm:pt-0">
                   <div className="text-left sm:text-right">
                     <p
                       className={`font-black font-mono text-base sm:text-lg ${
-                        tx.isVoid ? 'line-through text-gray-400' : 'text-emerald-800'
+                        tx.isVoid ? 'line-through text-gray-400 dark:text-gray-600' : 'text-emerald-800 dark:text-emerald-400'
                       }`}
                     >
                       {formatRupiah(tx.finalAmount)}
                     </p>
-                    <p className="text-[10px] text-gray-400">{tx.items.length} macam barang</p>
+                    <p className="text-[10px] text-gray-400 dark:text-gray-500">{tx.items.length} macam barang</p>
                   </div>
 
                   <div className="flex items-center space-x-1.5">
                     <button
                       onClick={() => onViewReceipt(tx)}
-                      className="px-3 py-2 text-emerald-800 bg-emerald-50 hover:bg-emerald-100 rounded-xl transition-all text-xs font-black flex items-center space-x-1"
+                      className="px-3 py-2 text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 rounded-xl transition-all text-xs font-black flex items-center space-x-1"
                       title="Lihat & Cetak Ulang Struk"
                     >
                       <Eye className="w-4 h-4" />
@@ -379,7 +379,7 @@ export const ReportsTab: React.FC<Props> = ({
                             onVoidTransaction(tx.id);
                           }
                         }}
-                        className="px-3 py-2 text-rose-700 bg-rose-50 hover:bg-rose-100 rounded-xl transition-all text-xs font-black flex items-center space-x-1"
+                        className="px-3 py-2 text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/50 hover:bg-rose-100 dark:hover:bg-rose-900/50 rounded-xl transition-all text-xs font-black flex items-center space-x-1"
                         title="Batalkan Transaksi (Void)"
                       >
                         <Ban className="w-4 h-4" />

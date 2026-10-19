@@ -4,7 +4,11 @@
 
 @layer base {
   body {
-    @apply bg-[#F8FAF9] text-[#0F172A] antialiased selection:bg-teal-100 selection:text-teal-900;
+    @apply bg-[#F6F8F7] text-[#0F172A] transition-colors duration-200 antialiased selection:bg-emerald-100 selection:text-emerald-950;
+  }
+  
+  html.dark body {
+    @apply bg-[#090D16] text-[#F8FAFC] selection:bg-emerald-900 selection:text-emerald-100;
   }
 }
 
@@ -23,6 +27,14 @@
   border-radius: 9999px;
 }
 
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

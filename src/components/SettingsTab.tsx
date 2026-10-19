@@ -52,97 +52,97 @@ export const SettingsTab: React.FC<Props> = ({
   return (
     <div className="space-y-6 pb-24 max-w-3xl mx-auto">
       <div>
-        <h2 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight flex items-center gap-2">
+        <h2 className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
           <span>Pengaturan & Profil Toko</span>
-          <span className="p-1 bg-emerald-100 text-emerald-800 rounded-lg text-xs font-black">
+          <span className="p-1 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 rounded-lg text-xs font-black">
             ⚙️ Setup
           </span>
         </h2>
-        <p className="text-xs text-gray-500 font-medium mt-0.5">
+        <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mt-0.5">
           Atur nama usaha, kasir aktif bertugas, dan template cetak struk belanja
         </p>
       </div>
 
       <form onSubmit={handleSave} className="space-y-5">
         {/* Store Profile Card */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-200/80 shadow-xs space-y-4">
-          <div className="flex items-center space-x-2.5 pb-3 border-b border-gray-100 text-emerald-900">
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+        <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs space-y-4">
+          <div className="flex items-center space-x-2.5 pb-3 border-b border-gray-100 dark:border-gray-800 text-emerald-900 dark:text-emerald-300">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
               <Store className="w-4 h-4" />
             </div>
             <div>
               <h3 className="font-extrabold text-sm">Identitas Usaha / Toko</h3>
-              <p className="text-[11px] text-gray-400">Dicetak di bagian atas setiap struk thermal</p>
+              <p className="text-[11px] text-gray-400 dark:text-gray-500">Dicetak di bagian atas setiap struk thermal</p>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 mb-1">Nama Toko:</label>
+            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">Nama Toko:</label>
             <input
               type="text"
               required
               value={storeName}
               onChange={(e) => setStoreName(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl outline-none focus:border-emerald-500 font-bold"
+              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-bold"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 mb-1">Alamat Lengkap Toko:</label>
+            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">Alamat Lengkap Toko:</label>
             <textarea
               rows={2}
               required
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl outline-none focus:border-emerald-500 font-medium"
+              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-medium"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 mb-1">
+            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">
               Nomor WhatsApp / Kontak Toko:
             </label>
             <input
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl outline-none focus:border-emerald-500 font-mono"
+              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-mono"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 mb-1">
+            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">
               Catatan Kaki Struk (Receipt Footer):
             </label>
             <textarea
               rows={2}
               value={receiptFooter}
               onChange={(e) => setReceiptFooter(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl outline-none focus:border-emerald-500 text-xs"
+              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 text-xs"
             />
           </div>
         </div>
 
         {/* Cashier Info Card */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-200/80 shadow-xs space-y-3">
-          <div className="flex items-center space-x-2.5 pb-3 border-b border-gray-100 text-emerald-900">
-            <div className="w-8 h-8 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center">
+        <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs space-y-3">
+          <div className="flex items-center space-x-2.5 pb-3 border-b border-gray-100 dark:border-gray-800 text-emerald-900 dark:text-emerald-300">
+            <div className="w-8 h-8 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center">
               <User className="w-4 h-4" />
             </div>
             <div>
               <h3 className="font-extrabold text-sm">Petugas Kasir Bertugas</h3>
-              <p className="text-[11px] text-gray-400">Identitas kasir yang melayani transaksi</p>
+              <p className="text-[11px] text-gray-400 dark:text-gray-500">Identitas kasir yang melayani transaksi</p>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-extrabold text-gray-700 mb-1">Nama Kasir Aktif:</label>
+            <label className="block text-xs font-extrabold text-gray-700 dark:text-gray-300 mb-1">Nama Kasir Aktif:</label>
             <input
               type="text"
               required
               value={activeCashier}
               onChange={(e) => setActiveCashier(e.target.value)}
-              className="w-full px-4 py-2.5 text-xs border border-gray-200 rounded-xl outline-none focus:border-emerald-500 font-bold"
+              className="w-full px-4 py-2.5 text-xs border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-xl outline-none focus:border-emerald-500 font-bold"
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ export const SettingsTab: React.FC<Props> = ({
         </button>
 
         {isSaved && (
-          <div className="p-4 bg-emerald-100 text-emerald-900 rounded-2xl text-xs font-black text-center shadow-xs animate-in fade-in">
+          <div className="p-4 bg-emerald-100 dark:bg-emerald-950/60 text-emerald-900 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 rounded-2xl text-xs font-black text-center shadow-xs animate-in fade-in">
             ✓ Pengaturan profil toko & kasir berhasil disimpan!
           </div>
         )}
@@ -183,8 +183,8 @@ export const SettingsTab: React.FC<Props> = ({
       </div>
 
       {/* Maintenance & Data Management */}
-      <div className="bg-white p-6 rounded-3xl border border-gray-200/80 shadow-xs space-y-3">
-        <h4 className="font-black text-xs text-gray-700 uppercase tracking-wider">
+      <div className="bg-white dark:bg-[#131B2E] p-6 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-xs space-y-3">
+        <h4 className="font-black text-xs text-gray-700 dark:text-gray-300 uppercase tracking-wider">
           Pencadangan & Pemulihan Data (Offline Storage)
         </h4>
 
@@ -192,9 +192,9 @@ export const SettingsTab: React.FC<Props> = ({
           <button
             type="button"
             onClick={handleExportJson}
-            className="flex-1 py-3 px-4 border border-gray-200 hover:bg-gray-50 rounded-2xl text-xs font-black text-gray-700 flex items-center justify-center space-x-2 shadow-xs transition-colors"
+            className="flex-1 py-3 px-4 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-2xl text-xs font-black text-gray-700 dark:text-gray-200 flex items-center justify-center space-x-2 shadow-xs transition-colors"
           >
-            <Download className="w-4 h-4 text-gray-500" />
+            <Download className="w-4 h-4 text-gray-500 dark:text-gray-400" />
             <span>Cadangkan Data (Backup JSON)</span>
           </button>
 
@@ -209,7 +209,7 @@ export const SettingsTab: React.FC<Props> = ({
                 onResetData();
               }
             }}
-            className="flex-1 py-3 px-4 border border-rose-200 hover:bg-rose-50 rounded-2xl text-xs font-black text-rose-700 flex items-center justify-center space-x-2 shadow-xs transition-colors"
+            className="flex-1 py-3 px-4 border border-rose-200 dark:border-rose-800/60 bg-white dark:bg-gray-800 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-2xl text-xs font-black text-rose-700 dark:text-rose-400 flex items-center justify-center space-x-2 shadow-xs transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Reset ke Data Demo Awal</span>

@@ -44,6 +44,23 @@ export function App() {
   const [scannerCallback, setScannerCallback] = useState<((code: string) => void) | null>(null);
   const [completedTransaction, setCompletedTransaction] = useState<Transaction | null>(null);
 
+  // Theme State (Dark / Light Mode)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('kasirpintar_theme');
+    if (saved) return saved === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('kasirpintar_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('kasirpintar_theme', 'light');
+    }
+  }, [isDarkMode]);
+
   // Toast notification
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -282,7 +299,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F8F7] flex flex-col font-sans text-gray-900 selection:bg-emerald-100 selection:text-emerald-950">
+    <div className="min-h-screen bg-[#F6F8F7] dark:bg-[#090D16] flex flex-col font-sans text-gray-900 dark:text-gray-100 selection:bg-emerald-100 selection:text-emerald-950 transition-colors duration-200">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-gray-900/95 backdrop-blur-md text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-2xl flex items-center space-x-2 border border-gray-700 animate-in fade-in slide-in-from-top-4">
@@ -300,6 +317,8 @@ export function App() {
           setIsScannerOpen(true);
         }}
         onGoToLowStock={() => setActiveTab('inventory')}
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={() => setIsDarkMode((prev) => !prev)}
       />
 
       {/* Main Tab View */}
@@ -357,12 +376,12 @@ export function App() {
       </main>
 
       {/* Mobile Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200/80 shadow-2xl sm:hidden">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#111827]/95 backdrop-blur-md border-t border-gray-200/80 dark:border-gray-800 shadow-2xl sm:hidden transition-colors">
         <div className="grid grid-cols-4 h-16">
           <button
             onClick={() => setActiveTab('pos')}
             className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
-              activeTab === 'pos' ? 'text-emerald-700 font-extrabold' : 'text-gray-400'
+              activeTab === 'pos' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
             }`}
           >
             <ShoppingCart className="w-5 h-5" />
@@ -372,7 +391,7 @@ export function App() {
           <button
             onClick={() => setActiveTab('inventory')}
             className={`flex flex-col items-center justify-center space-y-1 relative transition-colors ${
-              activeTab === 'inventory' ? 'text-emerald-700 font-extrabold' : 'text-gray-400'
+              activeTab === 'inventory' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
             }`}
           >
             <Package className="w-5 h-5" />
@@ -385,7 +404,7 @@ export function App() {
           <button
             onClick={() => setActiveTab('reports')}
             className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
-              activeTab === 'reports' ? 'text-emerald-700 font-extrabold' : 'text-gray-400'
+              activeTab === 'reports' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
             }`}
           >
             <BarChart3 className="w-5 h-5" />
@@ -395,7 +414,7 @@ export function App() {
           <button
             onClick={() => setActiveTab('settings')}
             className={`flex flex-col items-center justify-center space-y-1 transition-colors ${
-              activeTab === 'settings' ? 'text-emerald-700 font-extrabold' : 'text-gray-400'
+              activeTab === 'settings' ? 'text-emerald-600 dark:text-emerald-400 font-extrabold' : 'text-gray-400 dark:text-gray-500'
             }`}
           >
             <Settings className="w-5 h-5" />
@@ -405,13 +424,13 @@ export function App() {
       </nav>
 
       {/* Desktop Floating Navigation Pill */}
-      <div className="hidden sm:flex fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-white/90 backdrop-blur-lg border border-gray-200/90 rounded-2xl p-1.5 shadow-2xl shadow-black/10 space-x-1.5">
+      <div className="hidden sm:flex fixed bottom-5 left-1/2 -translate-x-1/2 z-40 bg-white/90 dark:bg-[#111827]/90 backdrop-blur-lg border border-gray-200/90 dark:border-gray-800 rounded-2xl p-1.5 shadow-2xl shadow-black/10 space-x-1.5 transition-colors">
         <button
           onClick={() => setActiveTab('pos')}
           className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
             activeTab === 'pos'
               ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
+              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
           }`}
         >
           <ShoppingCart className="w-4 h-4" />
@@ -423,7 +442,7 @@ export function App() {
           className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all relative ${
             activeTab === 'inventory'
               ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
+              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
           }`}
         >
           <Package className="w-4 h-4" />
@@ -440,7 +459,7 @@ export function App() {
           className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
             activeTab === 'reports'
               ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
+              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
           }`}
         >
           <BarChart3 className="w-4 h-4" />
@@ -452,7 +471,7 @@ export function App() {
           className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-black transition-all ${
             activeTab === 'settings'
               ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20'
-              : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
+              : 'text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100/70 dark:hover:bg-gray-800/70'
           }`}
         >
           <Settings className="w-4 h-4" />
